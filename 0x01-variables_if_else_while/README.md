@@ -1,0 +1,1 @@
+Second C programme that uses Betty
