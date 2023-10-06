@@ -1,3 +1,4 @@
+#include<stdio.h>
 /**
  *main - Code that prints a line with puts function
  *
