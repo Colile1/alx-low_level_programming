@@ -1,4 +1,3 @@
-#include "main.h"
 /**
  * print_rev - imprime en reversa
  * @s: string
