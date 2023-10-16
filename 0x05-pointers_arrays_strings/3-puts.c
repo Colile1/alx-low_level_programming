@@ -6,6 +6,7 @@
  *
  * Description: This function takes a pointer to a string as a parameter
  * and prints the string followed by a new line to the standard output.
+ * return: null
  */
 void _puts(char *str)
 {
