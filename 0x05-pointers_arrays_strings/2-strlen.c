@@ -4,6 +4,7 @@
  *
  * Description: This function takes a pointer to a string as a parameter
  * and returns the length of the string.
+ * Return: length
  */
 int _strlen(char *s)
 {
