@@ -5,7 +5,7 @@
  * Description: This function takes a pointer to a string as a parameter
  * and returns the length of the string.
  */
-int _strlen(char *s) //strlen - Returns the length of a string
+int _strlen(char *s) /*strlen - Returns the length of a string*/
 {
 int len = 0;
 while (s[len] != '\0')
