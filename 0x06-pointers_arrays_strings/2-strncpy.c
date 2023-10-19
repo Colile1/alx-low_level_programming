@@ -10,9 +10,9 @@
 char *_strncpy(char *dest, char *src, int n)
 {
 	int i;
-
-	/* Copyin at most n bytes from src to dest */
-	for (i = 0; i < n && src[i] != '\0'; i++)
+	i = 0;
+	/* Copying at most n bytes from src to dest */
+	for (i < n && src[i] != '\0'; i++)
 		dest[i] = src[i];
 
 	/* Filling the remaining space with null bytes if necessary */
