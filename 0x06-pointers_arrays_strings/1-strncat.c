@@ -12,9 +12,11 @@ char *_strncat(char *dest, char *src, int n)
 	int dest_len = 0;
 	int i;
 
+	/* Calculate the length of dest */
 	while (dest[dest_len] != '\0')
 		dest_len++;
 
+	/* Concatenate src to dest */
 	for (i = 0; i < n && src[i] != '\0'; i++)
 		dest[dest_len + i] = src[i];
 
