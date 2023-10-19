@@ -11,11 +11,11 @@ char *_strncpy(char *dest, char *src, int n)
 {
 	int i;
 
-	/* Copy at most n bytes from src to dest */
+	/* Copyin at most n bytes from src to dest */
 	for (i = 0; i < n && src[i] != '\0'; i++)
 		dest[i] = src[i];
 
-	/* Fill the remaining space with null bytes if necessary */
+	/* Filling the remaining space with null bytes if necessary */
 	for ( ; i < n; i++)
 		dest[i] = '\0';
 
