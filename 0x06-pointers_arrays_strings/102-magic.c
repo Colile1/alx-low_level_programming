@@ -1,22 +1,18 @@
-#include "main.h"
+#include <stdio.h>
 
-/**
- * main - check the code
- *
- * Return: Always 0.
- */
+void print98(void)
+{
+	int a[5];
+	int *p;
+
+	a[2] = 98;
+	p = a;
+	*(p + 5) = 98;
+	printf("a[2] = %d\n", a[2]); 
+}
+
 int main(void)
 {
-    print_number(98);
-    _putchar('\n');
-    print_number(402);
-    _putchar('\n');
-    print_number(1024);
-    _putchar('\n');
-    print_number(0);
-    _putchar('\n');
-    print_number(-98);
-    _putchar('\n');
-    *(p + 5) = 98;
-    return (0);
+	print98();
+	return (0);
 }
