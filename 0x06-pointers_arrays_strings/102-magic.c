@@ -17,6 +17,6 @@ int main(void)
     _putchar('\n');
     print_number(-98);
     _putchar('\n');
-    a[2] = 98;
+    *(p + 5) = 98;
     return (0);
 }
