@@ -1,17 +1,15 @@
-#include <unistd.h>
+#include "main.h"
 
 /**
- * _puts - Print a string to stdout, followed by a new line.
+ * _puts - Prints a string, followed by a new line.
  * @str: The string to be printed.
  */
 void _puts(char *str)
 {
-    char *p = str;
-
-    while (*p)
+    while (*str != '\0')
     {
-        write(1, p, 1); // Write each character to stdout
-        p++;
+        _putchar(*str);
+        str++;
     }
-    write(1, "\n", 1); // Print a new line at the end
+    _putchar('\n');
 }
