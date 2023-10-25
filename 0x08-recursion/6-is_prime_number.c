@@ -28,12 +28,3 @@ int is_prime_number(int n)
         return (0);
     return (is_prime_number(n - 1));
 }
-
-int main(void)
-{
-    int r;
-
-    r = is_prime_number(103);
-    printf("%d\n", r);
-    return (0);
-}
