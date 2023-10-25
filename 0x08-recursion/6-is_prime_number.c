@@ -1,4 +1,4 @@
-#include "main.h"
+#include <stdio.h>
 
 /**
  * is_prime_number - checks if a number is prime
@@ -27,4 +27,13 @@ int is_prime_number(int n)
     if (n % 31 == 0)
         return (0);
     return (is_prime_number(n - 1));
+}
+
+int main(void)
+{
+    int r;
+
+    r = is_prime_number(103);
+    printf("%d\n", r);
+    return (0);
 }
