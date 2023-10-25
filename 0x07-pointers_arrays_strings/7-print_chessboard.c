@@ -3,7 +3,8 @@
 /**
  * print_chessboard - Prints the chessboard
  * @a: The chessboard to print
- */
+*/
+
 void print_chessboard(char (*a)[8])
 {
 	int row, col;
