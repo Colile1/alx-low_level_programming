@@ -26,5 +26,5 @@ int is_prime_number_recursive(int n, int divisor)
  */
 int is_prime_number(int n)
 {
-	return is_prime_number_recursive(n, n - 1);
+	return (is_prime_number_recursive(n, n - 1));
 }
