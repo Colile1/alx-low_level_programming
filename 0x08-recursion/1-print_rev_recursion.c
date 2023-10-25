@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * print_string_reverse - Prints a string in reverse.
+ * print_rev_recursion - Prints a string in reverse.
  * @s: Pointer to the string to be printed.
  *
  * Description:
@@ -13,11 +13,11 @@
  * itself with the next character in the string (s + 1) and then prints
  * the current character using putchar(*s).
  */
-void print_string_reverse(char *s)
+void print_rev_recursion(char *s)
 {
     if (*s == '\0')
         return;
     
-    print_string_reverse(s + 1);
+    print_rev_recursion(s + 1);
     putchar(*s);
 }
