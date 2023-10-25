@@ -18,12 +18,12 @@
  */
 void _puts_recursion(char *s)
 {
-    if (*s == '\0')
-    {
-        putchar('\n'); /* Print newline after the string is fully printed. */
-        return;
-    }
+	if (*s == '\0')
+	{
+		putchar('\n'); /* Print newline after the string is fully printed. */
+		return;
+	}
 
-    putchar(*s);
-    _puts_recursion(s + 1);
+	putchar(*s);
+	_puts_recursion(s + 1);
 }
