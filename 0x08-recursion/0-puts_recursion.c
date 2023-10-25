@@ -21,15 +21,5 @@ void _puts_recursion(char *s)
     
     putchar(*s);
     _puts_recursion(s + 1);
-}
-
-/**
- * main - Entry point of the program.
- *
- * Return: 0 on success.
- */
-int main(void)
-{
-    _puts_recursion("First, solve the problem. Then, write the code");
-    return 0;
+    putchar('\n');
 }
