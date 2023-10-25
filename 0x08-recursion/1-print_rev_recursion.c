@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 /**
+ * main - check the code
  * _print_rev_recursion - Prints a string in reverse.
  * @s: The string to be printed in reverse.
  * Return: null
