@@ -13,13 +13,17 @@
  * character using putchar(*s) and then recursively calls itself with the
  * next character in the string (s + 1). Finally, after the recursive calls
  * are complete, the function prints a new line character using putchar('\n').
+ *
+ * @s: The string to be printed.
  */
 void _puts_recursion(char *s)
 {
     if (*s == '\0')
+    {
+        putchar('\n'); // Print newline after the string is fully printed.
         return;
-    
+    }
+
     putchar(*s);
     _puts_recursion(s + 1);
-    putchar('\n');
 }
