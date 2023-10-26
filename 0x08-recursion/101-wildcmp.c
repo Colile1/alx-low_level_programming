@@ -6,18 +6,22 @@
  */
 int is_palindrome(char *s)
 {
-	return (is_palindrome_helper(s, 0, _strlen_recursion(s) - 1));
+	int length = _strlen_recursion(s);
+	if (length <= 1)
+		return (1);
+
+	return (is_palindrome_check(s, 0, length - 1));
 }
 
 /**
- * is_palindrome_helper - Helper function for is_palindrome.
+ * is_palindrome_check - Helper function for is_palindrome.
  * @s: The string to check.
  * @start: The starting index.
  * @end: The ending index.
  *
  * Return: 1 if it's a palindrome, 0 if not.
  */
-int is_palindrome_helper(char *s, int start, int end)
+int is_palindrome_check(char *s, int start, int end)
 {
 	if (start >= end)
 		return (1);
@@ -25,7 +29,7 @@ int is_palindrome_helper(char *s, int start, int end)
 	if (s[start] != s[end])
 		return (0);
 
-	return (is_palindrome_helper(s, start + 1, end - 1));
+	return (is_palindrome_check(s, start + 1, end - 1));
 }
 
 /**
