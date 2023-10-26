@@ -1,4 +1,25 @@
 #include "main.h"
+#include <string.h>
+
+/**
+ * is_palindrome_recursive - helper function to check if a string is a palindrome
+ *
+ * @s: input string
+ * @start: starting index
+ * @end: ending index
+ *
+ * Return: 1 if the string is a palindrome, 0 if not.
+ */
+int is_palindrome_recursive(char *s, int start, int end)
+{
+    if (start >= end)
+        return 1;
+
+    if (s[start] == s[end])
+        return is_palindrome_recursive(s, start + 1, end - 1);
+
+    return 0;
+}
 
 /**
  * is_palindrome - check if a string is a palindrome
@@ -9,17 +30,7 @@
  */
 int is_palindrome(char *s)
 {
-    int i, len;
+    int len = strlen(s);
 
-    len = 0;
-    while (s[len])
-        len++;
-    i = 0;
-    while (i < len / 2)
-    {
-        if (s[i] != s[len - 1 - i])
-            return (0);
-        i++;
-    }
-    return (1);
+    return is_palindrome_recursive(s, 0, len - 1);
 }
