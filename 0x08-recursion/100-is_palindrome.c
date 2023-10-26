@@ -5,21 +5,24 @@
  *
  * @s: input string
  *
- * Return: 1 if the string is a palindrome, 0 if not.
+ * Return: 1 if palindrome, 0 if not
  */
 int is_palindrome(char *s)
 {
     int i, len;
 
+    if (*s == '\0')
+        return (1);
+
     len = 0;
-    while (s[len])
+    while (s[len] != '\0')
         len++;
-    i = 0;
-    while (i < len / 2)
+
+    for (i = 0; i < len / 2; i++)
     {
         if (s[i] != s[len - 1 - i])
             return (0);
-        i++;
     }
+
     return (1);
 }
