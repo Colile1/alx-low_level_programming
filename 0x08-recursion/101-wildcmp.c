@@ -1,25 +1,42 @@
 /**
- * wildcmp - Compares two strings with wildcards.
- * @s1: The first string.
- * @s2: The second string with wildcards.
+ * is_palindrome - Checks if a string is a palindrome.
+ * @s: The string to check.
  *
- * Return: 1 if identical, 0 if not.
+ * Return: 1 if the string is a palindrome, 0 if not.
  */
-int wildcmp(char *s1, char *s2)
+int is_palindrome(char *s)
 {
-	if (*s2 == '*')
-	{
-		if (*(s2 + 1) == '*')
-			return (wildcmp(s1, s2 + 1));
+	return (is_palindrome_helper(s, 0, _strlen_recursion(s) - 1));
+}
 
-		if (wildcmp(s1, s2 + 1) || (*s1 != '\0' && wildcmp(s1 + 1, s2)))
-			return (1);
+/**
+ * is_palindrome_helper - Helper function for is_palindrome.
+ * @s: The string to check.
+ * @start: The starting index.
+ * @end: The ending index.
+ *
+ * Return: 1 if it's a palindrome, 0 if not.
+ */
+int is_palindrome_helper(char *s, int start, int end)
+{
+	if (start >= end)
+		return (1);
 
+	if (s[start] != s[end])
 		return (0);
-	}
 
-	if (*s1 == *s2)
-		return (*s1 == '\0' ? 1 : wildcmp(s1 + 1, s2 + 1));
+	return (is_palindrome_helper(s, start + 1, end - 1));
+}
 
-	return (0);
+/**
+ * _strlen_recursion - Returns the length of a string.
+ * @s: Pointer to the string.
+ *
+ * Return: Length of the string.
+ */
+int _strlen_recursion(char *s)
+{
+	if (*s == '\0')
+		return (0);
+	return (1 + _strlen_recursion(s + 1));
 }
