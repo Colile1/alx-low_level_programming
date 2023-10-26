@@ -1,28 +1,37 @@
-#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
- * is_palindrome - check if a string is a palindrome
+ * wildcmp - Compares two strings for wildcard matching.
+ * @s1: Pointer to the first string.
+ * @s2: Pointer to the second string.
  *
- * @s: input string
- *
- * Return: 1 if palindrome, 0 if not
+ * Return: 1 if the strings are identical, 0 otherwise.
  */
-int is_palindrome(char *s)
+int wildcmp(char *s1, char *s2)
 {
-    int i, len;
-
-    if (*s == '\0')
+    if (*s1 == '\0' && *s2 == '\0')
         return (1);
-
-    len = 0;
-    while (s[len] != '\0')
-        len++;
-
-    for (i = 0; i < len / 2; i++)
+    
+    if (*s2 == '*')
     {
-        if (s[i] != s[len - 1 - i])
+        if (*(s2 + 1) == '\0')
+            return (1);
+        
+        if (*s1 == '\0')
             return (0);
+        
+        return (wildcmp(s1, s2 + 1) || wildcmp(s1 + 1, s2));
     }
-
-    return (1);
+    
+    if (*s2 == '?' || *s1 == *s2)
+    {
+        if (*s1 == '\0' || *s2 == '\0')
+            return (0);
+        
+        return (wildcmp(s1 + 1, s2 + 1));
+    }
+    
+    return (0);
 }
