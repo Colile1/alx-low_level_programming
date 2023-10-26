@@ -1,36 +1,47 @@
 #include "main.h"
-#include <string.h>
 
 /**
- * is_palindrome_recursive - helper function to check if a string is a palindrome
+ * _strlen - Calculate the length of a string.
+ * @s: The string to be measured.
  *
- * @s: input string
- * @start: starting index
- * @end: ending index
- *
- * Return: 1 if the string is a palindrome, 0 if not.
+ * Return: The length of the string.
  */
-int is_palindrome_recursive(char *s, int start, int end)
+int _strlen(char *s)
 {
-	if (start >= end)
-		return (1);
-
-	if (s[start] == s[end])
-		return (is_palindrome_recursive(s, start + 1, end - 1));
-
+	if (*s)
+		return (1 + _strlen(s + 1));
 	return (0);
 }
 
 /**
- * is_palindrome - check if a string is a palindrome
+ * check_palindrome - Check if a string is a palindrome.
+ * @s: The string to be checked.
+ * @start: The index for the start of the comparison.
+ * @end: The index for the end of the comparison.
  *
- * @s: input string
+ * Return: 1 if it's a palindrome, 0 otherwise.
+ */
+int check_palindrome(char *s, int start, int end)
+{
+	if (start >= end)
+		return (1);
+	if (s[start] != s[end])
+		return (0);
+	return (check_palindrome(s, start + 1, end - 1));
+}
+
+/**
+ * is_palindrome - Check if a string is a palindrome.
+ * @s: The string to be checked.
  *
- * Return: 1 if the string is a palindrome, 0 if not.
+ * Return: 1 if it's a palindrome, 0 otherwise.
  */
 int is_palindrome(char *s)
 {
-	int len = strlen(s);
+	int len = _strlen(s);
 
-	return (is_palindrome_recursive(s, 0, len - 1));
+	if (len == 0)
+		return (1);
+
+	return (check_palindrome(s, 0, len - 1));
 }
