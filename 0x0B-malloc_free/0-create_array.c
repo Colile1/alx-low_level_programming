@@ -21,8 +21,8 @@ arr = (char *)malloc(size * sizeof(char));
 if (arr == NULL)
 return (NULL);
 
-    for (i = 0; i < size; i++)
-        arr[i] = c;
+for (i = 0; i < size; i++)
+arr[i] = c;
 
-    return (arr);
+return (arr);
 }
