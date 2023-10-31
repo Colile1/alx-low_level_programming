@@ -8,25 +8,25 @@
  */
 int count_words(char *str)
 {
-    int count = 0;
-    int in_word = 0;
+int count = 0;
+int in_word = 0;
 
-    while (*str)
-    {
-        if (*str == ' ' || *str == '\t' || *str == '\n')
-        {
-            if (in_word)
-                in_word = 0;
-        }
-        else if (!in_word)
-        {
-            in_word = 1;
-            count++;
-        }
-        str++;
-    }
+while (*str)
+{
+if (*str == ' ' || *str == '\t' || *str == '\n')
+{
+if (in_word)
+in_word = 0;
+}
+else if (!in_word)
+{
+in_word = 1;
+count++;
+}
+str++;
+}
 
-    return count;
+return count;
 }
 
 /**
