@@ -55,8 +55,8 @@ char **strtow(char *str)
 			str++;
 
 		word_len = 0;
-		while (str[word_len] != ' ' && str[word_len] != '\t' 
-        && str[word_len] != '\n' && str[word_len] != '\0')
+		while (str[word_len] != ' ' && str[word_len] != '\t'
+&& str[word_len] != '\n' && str[word_len] != '\0')
 			word_len++;
 		words[i] = (char *)malloc((word_len + 1) * sizeof(char));
 		if (words[i] == NULL)
