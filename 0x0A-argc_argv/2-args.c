@@ -8,9 +8,14 @@
  * Return: 0
  */
 
-int main(int argc, char *argv[]) {
-    for (int i = 0; i < argc; i++) {
-        printf("%s\n", argv[i]);
+int main(int argc, char *argv [])
+{
+    int index;
+    
+    for (index = 0; index < argc; index++)
+    {
+        printf("%s\\n", argv [index]);
     }
+
     return 0;
 }
