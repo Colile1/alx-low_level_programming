@@ -21,13 +21,16 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    int coins = 0;
-    int denominations[] = {25, 10, 5, 2, 1};
-    for (int i = 0; i < sizeof(denominations) / sizeof(int); i++) {
-        coins += cents / denominations[i];
-        cents %= denominations[i];
-    }
+    int quarters = cents / 25;
+    cents %= 25;
+    int dimes = cents / 10;
+    cents %= 10;
+    int nickels = cents / 5;
+    cents %= 5;
+    int pennies = cents;
 
-    printf("%d\n", coins);
+    int totalCoins = quarters + dimes + nickels + pennies;
+    printf("%d\n", totalCoins);
+
     return 0;
 }
