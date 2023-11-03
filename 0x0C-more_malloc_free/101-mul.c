@@ -10,26 +10,23 @@
  */
 int is_digit(char *str)
 {
-    if (!str)
-        return (0);
+if (!str)
+return (0);
 
-    while (*str)
-    {
-        if (*str < '0' || *str > '9')
-            return (0);
-        str++;
-    }
-
-    return (1);
+while (*str)
+{
+if (*str < '0' || *str > '9')
+return (0);
+str++;
 }
 
-/**
- * print_error - Print an error message and exit with status 98
- */
+return (1);
+}
+
 void print_error(void)
 {
-    printf("Error\n");
-    exit(98);
+printf("Error\n");
+exit(98);
 }
 
 /**
@@ -39,55 +36,55 @@ void print_error(void)
  */
 void multiply(char *num1, char *num2)
 {
-    int len1 = 0, len2 = 0, i, j, carry, n1, n2, sum, tmp;
-    int *result;
+int len1 = 0, len2 = 0, i, j, carry, n1, n2, sum, tmp;
+int *result;
 
-    while (num1[len1])
-        len1++;
-    while (num2[len2])
-        len2++;
+while (num1[len1])
+len1++;
+while (num2[len2])
+len2++;
 
-    result = malloc(sizeof(int) * (len1 + len2));
-    if (!result)
-        print_error();
+result = malloc(sizeof(int) * (len1 + len2));
+if (!result)
+print_error();
 
-    for (i = 0; i < len1 + len2; i++)
-        result[i] = 0;
+for (i = 0; i < len1 + len2; i++)
+result[i] = 0;
 
-    for (i = len1 - 1; i >= 0; i--)
-    {
-        carry = 0;
-        n1 = num1[i] - '0';
-        j = len2 - 1;
+for (i = len1 - 1; i >= 0; i--)
+{
+carry = 0;
+n1 = num1[i] - '0';
+j = len2 - 1;
 
-        for (; j >= 0; j--)
-        {
-            n2 = num2[j] - '0';
-            sum = n1 * n2 + result[i + j + 1] + carry;
-            carry = sum / 10;
-            result[i + j + 1] = sum % 10;
-        }
-        result[i + j + 1] = carry;
-    }
+for (; j >= 0; j--)
+{
+n2 = num2[j] - '0';
+sum = n1 * n2 + result[i + j + 1] + carry;
+carry = sum / 10;
+result[i + j + 1] = sum % 10;
+}
+result[i + j + 1] = carry;
+}
 
-    i = 0;
-    while (result[i] == 0)
-        i++;
+i = 0;
+while (result[i] == 0)
+i++;
 
-    tmp = len1 + len2 - i;
-    for (j = 0; j < tmp; j++)
-        putchar(result[i + j] + '0');
-    putchar('\n');
-    free(result);
+tmp = len1 + len2 - i;
+for (j = 0; j < tmp; j++)
+putchar(result[i + j] + '0');
+putchar('\n');
+free(result);
 }
 
 int main(int argc, char *argv[])
 {
-    if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
-        print_error();
+if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
+print_error();
 
-    multiply(argv[1], argv[2]);
+multiply(argv[1], argv[2]);
 
-    return (0);
+return (0);
 }
 
