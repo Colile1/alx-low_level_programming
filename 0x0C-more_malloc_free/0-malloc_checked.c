@@ -3,16 +3,16 @@
 
 /**
  * malloc_checked - Allocates memory using malloc
- * @b: The size of memory to allocate
+ * @size: The size of memory to allocate
  *
  * Return: A pointer to the allocated memory
  */
 
-void *malloc_checked(unsigned int b) {
-    void *p = malloc(b);
-    if (p == NULL) {
-        fprintf(stderr, "Error: malloc failed\n");
+void *malloc_checked(unsigned int size) {
+    void *ptr = malloc(size);
+    if (ptr == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
         exit(98);
     }
-    return p;
+    return ptr;
 }
