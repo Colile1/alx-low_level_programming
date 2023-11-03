@@ -23,6 +23,10 @@ str++;
 return (1);
 }
 
+/**
+ * print_error - Print an error message and exit with status 98
+ */
+
 void print_error(void)
 {
 printf("Error\n");
@@ -78,6 +82,12 @@ putchar('\n');
 free(result);
 }
 
+/**
+ * main - Multiplies two numbers
+ * @argc: The number of arguments
+ * @argv: The argument vector
+ * Return: 0 on success, 1 on error
+*/
 int main(int argc, char *argv[])
 {
 if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
@@ -87,4 +97,5 @@ multiply(argv[1], argv[2]);
 
 return (0);
 }
+
 
