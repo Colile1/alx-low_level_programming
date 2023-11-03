@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "main.h"
-
 /**
- * is_digit - Check if a string contains only digits
- * @str: The string to check
- *
- * Return: 1 if all characters are digits, 0 otherwise
- */
+*is_digit - Check if a string contains only digits
+*@str: The string to check
+*
+*Return: 1 if all characters are digits, 0 otherwise
+*/
 int is_digit(char *str)
 {
 if (!str)
@@ -81,12 +80,11 @@ putchar(result[i + j] + '0');
 putchar('\n');
 free(result);
 }
-
 /**
- * main - Multiplies two numbers
- * @argc: The number of arguments
- * @argv: The argument vector
- * Return: 0 on success, 1 on error
+* main - Multiplies two numbers
+* @argc: The number of arguments
+* @argv: The argument vector
+* Return: 0 on success, 1 on error
 */
 int main(int argc, char *argv[])
 {
