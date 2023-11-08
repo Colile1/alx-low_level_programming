@@ -1,3 +1,6 @@
 {
-    "codeium.enableSearch": true
+    "codeium.enableSearch": true,
+    "files.associations": {
+        "3-calc.h": "c"
+    }
 }
