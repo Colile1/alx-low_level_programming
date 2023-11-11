@@ -1,5 +1,3 @@
-#bin/bash
-
 gcc -c 0-isupper.c -o 0-isupper.o
 gcc -c 0-memset.c -o 0-memset.o
 gcc -c 0-strcat.c -o 0-strcat.o
