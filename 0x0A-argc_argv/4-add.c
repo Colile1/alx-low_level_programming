@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
 
 /**
  * main - Entry point
@@ -8,18 +9,22 @@
  *
  * Return: 0 if successful, 1 if there are issues with the arguments
  */
-int main(int argc, char *argv[]) {
-    if (argc < 2) {
+int main(int argc, char *argv[])
+{
+    if (argc < 2)
+    {
         printf("0\n");
         return 0;
     }
 
     int sum = 0;
-    for (int i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; i++)
+    {
         char *endptr;
         long num = strtol(argv[i], &endptr, 10);
 
-        if (*endptr != '\0') {
+        if (*endptr != '\0')
+        {
             printf("Error\n");
             return 1;
         }
