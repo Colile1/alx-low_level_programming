@@ -1,18 +1,17 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-
 /**
  * main - Entry point
- * @argc: The number of command-line arguments
- * @argv: An array containing the program command-line arguments
+ * @argc: The number of command line arguments
+ * @argv: An array containing the command line arguments
  *
- * Return: 0 if successful, 1 if there are issues with the arguments
+ * Return: 0 if successful, 1 if there is an error
  */
 int main(int argc, char *argv[])
 {
     int sum = 0;
+    int i;
 
     if (argc < 2)
     {
@@ -20,12 +19,12 @@ int main(int argc, char *argv[])
         return (0);
     }
 
-    for (int i = 1; i < argc; i++)
+    for (i = 1; i < argc; i++)
     {
         char *endptr;
         long num = strtol(argv[i], &endptr, 10);
 
-        if (*endptr != '\0')
+        if (*endptr != '\0' || num < 0)
         {
             printf("Error\n");
             return (1);
