@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "dog.h"
 
@@ -14,6 +15,7 @@ dog_t *new_dog(char *name, float age, char *owner)
     dog_t *new_dog;
     char *name_copy, *owner_copy;
     int name_length = 0, owner_length = 0;
+    int i;
 
     while (name[name_length])
         name_length++;
@@ -40,10 +42,10 @@ dog_t *new_dog(char *name, float age, char *owner)
         return (NULL);
     }
 
-    for (int i = 0; i <= name_length; i++)
+    for (i = 0; i <= name_length; i++)
         name_copy[i] = name[i];
 
-    for (int i = 0; i <= owner_length; i++)
+    for (i = 0; i <= owner_length; i++)
         owner_copy[i] = owner[i];
 
     new_dog->name = name_copy;
