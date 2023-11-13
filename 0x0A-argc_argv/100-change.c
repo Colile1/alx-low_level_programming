@@ -8,7 +8,8 @@
  *
  * Return: 0 if successful, 1 if there is an error
  */
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) 
+{
 int cents;
 int coins[] = {25, 10, 5, 2, 1};
 int numCoins = 0;
