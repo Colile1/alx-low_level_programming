@@ -2,12 +2,12 @@
 #include <stdlib.h>
 
 /**
- * main - Entry point
- * @argc: The number of command-line arguments
- * @argv: An array containing the program's command-line arguments
- *
- * Return: 0 if successful, 1 if there is an error
- */
+*main - Entry point
+*@argc: The number of command-line arguments
+*@argv: An array containing the program's command-line arguments
+*
+*Return: 0 if successful, 1 if there is an error
+*/
 int main(int argc, char *argv[]) 
 {
 int cents;
