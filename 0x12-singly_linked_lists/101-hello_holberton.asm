@@ -1,18 +1,20 @@
-<<<<<<<<<<<<<<  ✨ Codeium Command ⭐ >>>>>>>>>>>>>>>>
-section .data
-    format db 'Hello, Holberton', 0
+extern printf
 
 section .text
-    global _start
+   global main
 
-_start:
-    ; call printf function
-    push format
-    call printf
-    add esp, 4
+main:
+   push rbp
 
-    ; exit program
-    mov eax, 1
-    xor ebx, ebx
-    int 0x80
-<<<<<<<  6b56bce2-3662-4d5d-990c-3e25818f1712  >>>>>>>
+   mov rdi, fmt
+   mov rsi, msg
+   mov rax, 0
+   call printf
+
+   pop rbp
+   mov rax, 0 
+   ret
+
+section .data
+   msg: db "Hello, Holberton", 0
+   fmt: db "%s", 10, 0
