@@ -6,8 +6,6 @@
  * @h: pointer to the head of the list
  *
  * Return: the number of nodes
- * 
- * Description: This function prints all the elements of a linked list.
  */
 size_t print_list(const list_t *h)
 {
