@@ -15,4 +15,3 @@ int main(void)
     /* main function code */
     return 0;
 }
-
