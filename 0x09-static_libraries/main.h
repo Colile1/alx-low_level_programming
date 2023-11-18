@@ -1,8 +1,7 @@
- #ifndef MAIN_H
+#ifndef MAIN_H
 #define MAIN_H
-#include <stdio.h>
 
-/* Function prototypes */
+
 
 int _isupper(int c);
 char *_memset(char *s, char b, unsigned int n);
@@ -24,4 +23,6 @@ char *_strstr(char *haystack, char *needle);
 int _abs(int n);
 char *_strcpy(char *dest, char *src);
 int _putchar(char c);
+
 #endif
+
