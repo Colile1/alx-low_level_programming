@@ -4,10 +4,10 @@
 #include "lists.h"
 
 /**
- * print_listint_safe - prints a listint_t linked list
- * @head: pointer to the head of the list
- * 
- * Return: the number of nodes in the list
+ * print_listint_safe - Prints a linked list safely (handles loops)
+ * @head: Pointer to the head of the list
+ *
+ * Return: The number of nodes in the list
  */
 size_t print_listint_safe(const listint_t *head)
 {
@@ -41,21 +41,22 @@ size_t print_listint_safe(const listint_t *head)
     }
     else /* if loop, print the list until loop point */
     {
-        while (head != loop)
+        const listint_t *temp = head;
+        do
         {
-            printf("[%p] %d\n", (void *)head, head->n);
-            head = head->next;
+            printf("[%p] %d\n", (void *)temp, temp->n);
+            temp = temp->next;
             count++;
-        }
+        } while (temp != loop);
         /* print the loop node and the next node */
-        printf("[%p] %d\n", (void *)head, head->n);
-        head = head->next;
+        printf("[%p] %d\n", (void *)temp, temp->n);
+        temp = temp->next;
         count++;
-        printf("-> [%p] %d\n", (void *)head, head->n);
-        while (head != loop)
+        printf("-> [%p] %d\n", (void *)temp, temp->n);
+        while (temp != loop)
         {
-            printf("[%p] %d\n", (void *)head, head->n);
-            head = head->next;
+            printf("[%p] %d\n", (void *)temp, temp->n);
+            temp = temp->next;
             count++;
         }
     }
