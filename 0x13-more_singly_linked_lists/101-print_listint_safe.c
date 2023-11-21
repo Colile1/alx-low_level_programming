@@ -1,4 +1,3 @@
-<<<<<<<<<<<<<<  ✨ Codeium Command ⭐ >>>>>>>>>>>>>>>>
 #include <stdlib.h>
 #include <stdio.h>
 #include "lists.h"
@@ -49,4 +48,3 @@ size_t print_listint_safe(const listint_t *head)
 
     return count;
 }
-<<<<<<<  516676eb-49ad-4f7f-bdb2-37b195bbc18f  >>>>>>>
