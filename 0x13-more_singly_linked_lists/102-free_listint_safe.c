@@ -1,60 +1,37 @@
-#include "lists.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include "lists.h"
 
 /**
- * free_listint_safe - frees a listint_t list
- * @h: pointer to the head of the list
- * Return: the size of the list that was freed
+ * free_listint_safe - Frees a listint_t list safely
+ * @h: Double pointer to the head of the list
+ *
+ * Return: The size of the list that was freed
  */
 size_t free_listint_safe(listint_t **h)
 {
-    size_t count = 0;
-    listint_t *slow, *fast, *loop, *tmp;
+    size_t size = 0;
+    listint_t *tmp;
 
     if (h == NULL || *h == NULL)
         return (0);
 
-    slow = fast = *h;
-    /* detect loop using Floyd's cycle-finding algorithm */
-    while (slow && fast && fast->next)
+    while (*h != NULL)
     {
-        slow = slow->next;
-        fast = fast->next->next;
-        if (slow == fast) /* loop found */
+        size++;
+        if (*h <= (*h)->next)
         {
-            loop = slow;
+            tmp = *h;
+            *h = (*h)->next;
+            free(tmp);
             break;
         }
-    }
-    /* if no loop, free the list normally */
-    if (loop == NULL)
-    {
-        while (*h)
-        {
-            tmp = *h;
-            *h = (*h)->next;
-            free(tmp);
-            count++;
-        }
-    }
-    else /* if loop, free the list until loop point */
-    {
-        while (*h != loop)
-        {
-            tmp = *h;
-            *h = (*h)->next;
-            free(tmp);
-            count++;
-        }
-        /* free the loop node and the next node */
         tmp = *h;
         *h = (*h)->next;
         free(tmp);
-        count++;
-        tmp = *h;
-        *h = NULL;
-        free(tmp);
     }
-    return (count);
+
+    *h = NULL;
+    return (size);
 }
