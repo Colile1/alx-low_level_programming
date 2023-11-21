@@ -11,21 +11,21 @@
  */
 size_t print_listint_safe(const listint_t *head)
 {
-const listint_t *current = head;
-size_t count = 0;
+    const listint_t *current = head;
+    size_t count = 0;
 
-while (current != NULL && current != current->next)
-{
-printf("[%p] %d\n", (void *)current, current->n);
-count++;
-current = current->next;
-}
+    while (current != NULL && current != current->next)
+    {
+        printf("[%p] %d\n", (void *)current, current->n);
+        count++;
+        current = current->next;
+    }
 
-if (current != NULL)
-{
-printf("[%p] %d\n", (void *)current, current->n);
-printf("-> [%p] %d\n", (void *)current->next, current->next->n);
-}
+    if (current != NULL)
+    {
+        printf("[%p] %d\n", (void *)current, current->n);
+        printf("-> [%p] %d\n", (void *)current->next, current->next->n);
+    }
 
 return (count);
 }
