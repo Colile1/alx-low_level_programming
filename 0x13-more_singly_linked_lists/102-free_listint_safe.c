@@ -3,35 +3,23 @@
 #include <stdio.h>
 #include "lists.h"
 
-/**
- * free_listint_safe - Frees a listint_t list safely
- * @h: Double pointer to the head of the list
- *
- * Return: The size of the list that was freed
- */
 size_t free_listint_safe(listint_t **h)
 {
-    size_t size = 0;
     listint_t *tmp;
+    listint_t *current;
+    size_t count = 0;
 
-    if (h == NULL || *h == NULL)
+    if (!h || !*h)
         return (0);
 
-    while (*h != NULL)
-    {
-        size++;
-        if (*h <= (*h)->next)
-        {
-            tmp = *h;
-            *h = (*h)->next;
-            free(tmp);
-            break;
-        }
-        tmp = *h;
-        *h = (*h)->next;
-        free(tmp);
+    current = *h;  
+    while (current) {
+        tmp = current->next;
+        free(current);
+        current = tmp;
+        count++;
     }
 
     *h = NULL;
-    return (size);
+    return (count);
 }
