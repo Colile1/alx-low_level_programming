@@ -14,6 +14,7 @@ size_t print_listint_safe(const listint_t *head)
     const listint_t *slow = head;
     const listint_t *fast = head;
     size_t count = 0;
+    int loop_found = 0;
 
     if (head == NULL)
         exit(98);
@@ -26,15 +27,27 @@ size_t print_listint_safe(const listint_t *head)
 
         if (slow == fast)
         {
-            printf("Loop found, exiting...\n");
-            exit(98);
+            loop_found = 1;
+            break;
         }
 
         count++;
     }
 
-    printf("[%p] %d\n", (void *)slow, slow->n);
-    count++;
+    if (loop_found)
+    {
+        printf("-> [%p] %d\n", (void *)slow, slow->n);
+        return (count);
+    }
+
+    slow = head;
+    while (slow)
+    {
+        printf("[%p] %d\n", (void *)slow, slow->n);
+        slow = slow->next;
+        count++;
+    }
 
     return (count);
 }
+
