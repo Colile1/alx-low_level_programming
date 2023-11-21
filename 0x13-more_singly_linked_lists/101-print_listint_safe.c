@@ -1,3 +1,4 @@
+<<<<<<<<<<<<<<  ✨ Codeium Command ⭐ >>>>>>>>>>>>>>>>
 #include <stdlib.h>
 #include <stdio.h>
 #include "lists.h"
@@ -10,36 +11,42 @@
  */
 size_t print_listint_safe(const listint_t *head)
 {
+    const listint_t *slow, *fast;
     size_t count = 0;
-    const listint_t *current = head;
-    const listint_t *loop_start = NULL;
 
-    while (current != NULL)
+    if (head == NULL)
+        exit(98);
+
+    slow = head;
+    fast = head;
+
+    while (fast != NULL && fast->next != NULL)
     {
-        printf("[%p] %d\n", (void *)current, current->n);
+        printf("[%p] %d\n", (void *)slow, slow->n);
         count++;
 
-        if (current > current->next)
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
         {
-            loop_start = current->next;
-            printf("-> [%p] %d\n", (void *)loop_start, loop_start->n);
+            printf("-> [%p] %d\n", (void *)slow, slow->n);
             break;
         }
-
-        current = current->next;
     }
 
-    if (loop_start != NULL)
+    while (fast != NULL && fast->next != NULL)
     {
-        current = head;
-        while (current != loop_start)
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
         {
-            printf("[%p] %d\n", (void *)current, current->n);
-            count++;
-            current = current->next;
+            printf("-> [%p] %d\n", (void *)slow, slow->n);
+            break;
         }
-        printf("-> [%p] %d\n", (void *)loop_start, loop_start->n);
     }
 
     return count;
 }
+<<<<<<<  516676eb-49ad-4f7f-bdb2-37b195bbc18f  >>>>>>>
