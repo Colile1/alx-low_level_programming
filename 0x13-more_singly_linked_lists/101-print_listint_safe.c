@@ -1,24 +1,21 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stddef.h>
 #include "lists.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * print_listint_safe - prints a listint_t linked list
- * @head: pointer to the head of the list
- * 
- * Return: the number of nodes in the list
+ * free_listint_safe - frees a listint_t list
+ * @h: pointer to the head of the list
+ * Return: the size of the list that was freed
  */
-size_t print_listint_safe(const listint_t *head)
+size_t free_listint_safe(listint_t **h)
 {
     size_t count = 0;
-    const listint_t *slow, *fast, *loop;
+    listint_t *slow, *fast, *loop, *tmp;
 
-    if (head == NULL)
-        exit(98);
+    if (h == NULL || *h == NULL)
+        return (0);
 
-    slow = fast = head;
+    slow = fast = *h;
     /* detect loop using Floyd's cycle-finding algorithm */
     while (slow && fast && fast->next)
     {
@@ -30,29 +27,34 @@ size_t print_listint_safe(const listint_t *head)
             break;
         }
     }
-    /* if no loop, print the list normally */
+    /* if no loop, free the list normally */
     if (loop == NULL)
     {
-        while (head)
+        while (*h)
         {
-            printf("[%p] %d\n", (void *)head, head->n);
-            head = head->next;
+            tmp = *h;
+            *h = (*h)->next;
+            free(tmp);
             count++;
         }
     }
-    else /* if loop, print the list until loop point */
+    else /* if loop, free the list until loop point */
     {
-        while (head != loop)
+        while (*h != loop)
         {
-            printf("[%p] %d\n", (void *)head, head->n);
-            head = head->next;
+            tmp = *h;
+            *h = (*h)->next;
+            free(tmp);
             count++;
         }
-        /* print the loop node and the next node */
-        printf("[%p] %d\n", (void *)head, head->n);
-        head = head->next;
+        /* free the loop node and the next node */
+        tmp = *h;
+        *h = (*h)->next;
+        free(tmp);
         count++;
-        printf("-> [%p] %d\n", (void *)head, head->n);
+        tmp = *h;
+        *h = NULL;
+        free(tmp);
     }
     return (count);
 }
