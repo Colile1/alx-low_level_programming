@@ -11,28 +11,28 @@
  */
 size_t free_listint_safe(listint_t **h)
 {
-size_t count = 0;
-listint_t *current, *next;
+    size_t count = 0;
+    listint_t *current, *next;
 
-if (h == NULL || *h == NULL)
-return (count);
+    if (h == NULL || *h == NULL)
+        return (count);
 
-current = *h;
-while (current != NULL)
-{
-next = current->next;
-free(current);
-count++;
+    current = *h;
+    while (current != NULL)
+    {
+        next = current->next;
+        free(current);
+        count++;
 
-if (current <= next)
-{
-printf("Loop detected, freeing stopped\n");
-break;
-}
+        if (current <= next)
+        {
+            printf("Loop detected, freeing stopped\n");
+            break;
+        }
 
-current = next;
-}
+        current = next;
+    }
 
-*h = NULL;
-return (count);
+    *h = NULL;
+    return (count);
 }
