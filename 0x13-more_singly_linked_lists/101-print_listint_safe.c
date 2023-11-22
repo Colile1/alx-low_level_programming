@@ -1,60 +1,38 @@
-#include "lists.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "lists.h"
 
 /**
- * free_listint_safe - frees a listint_t list
- * @h: pointer to the head of the list
- * Return: the size of the list that was freed
+ * print_listint_safe - Prints a listint_t linked list
+ * @head: Pointer to the head of the list
+ *
+ * Return: The number of nodes in the list
  */
-size_t free_listint_safe(listint_t **h)
+size_t print_listint_safe(const listint_t *head)
 {
     size_t count = 0;
-    listint_t *slow, *fast, *loop, *tmp;
+    const listint_t *current = head;
+    const listint_t *loop_start = find_listint_loop((listint_t *)head);
 
-    if (h == NULL || *h == NULL)
-        return (0);
-
-    slow = fast = *h;
-    /* detect loop using Floyd's cycle-finding algorithm */
-    while (slow && fast && fast->next)
+    while (current != NULL && current != loop_start)
     {
-        slow = slow->next;
-        fast = fast->next->next;
-        if (slow == fast) /* loop found */
-        {
-            loop = slow;
-            break;
-        }
-    }
-    /* if no loop, free the list normally */
-    if (loop == NULL)
-    {
-        while (*h)
-        {
-            tmp = *h;
-            *h = (*h)->next;
-            free(tmp);
-            count++;
-        }
-    }
-    else /* if loop, free the list until loop point */
-    {
-        while (*h != loop)
-        {
-            tmp = *h;
-            *h = (*h)->next;
-            free(tmp);
-            count++;
-        }
-        /* free the loop node and the next node */
-        tmp = *h;
-        *h = (*h)->next;
-        free(tmp);
+        printf("[%p] %d\n", (void *)current, current->n);
+        current = current->next;
         count++;
-        tmp = *h;
-        *h = NULL;
-        free(tmp);
     }
-    return (count);
+
+    if (current == loop_start)
+    {
+        printf("-> [%p] %d\n", (void *)current, current->n);
+        count++;
+    }
+
+    if (current != NULL)
+    {
+        printf("-> [%p] %d\n", (void *)current, current->n);
+        printf("Error: linked list contains a loop\n");
+        exit(98);
+    }
+
+    return count;
 }
