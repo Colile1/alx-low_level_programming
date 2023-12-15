@@ -20,10 +20,13 @@ for (i = 0; i < EI_NIDENT; i++)
 printf("%02x ", elf_header->e_ident[i]);
 }
 printf("\n");
-printf("  Class:   %s\n", (elf_header->e_ident[EI_CLASS] == ELFCLASS32) ? "ELF32" : "ELF64");
-printf("  Data:    %s\n", (elf_header->e_ident[EI_DATA] == ELFDATA2LSB) ? "2's complement, little endian" : "2's complement, big endian");
+printf("  Class:   %s\n", (elf_header->e_ident[EI_CLASS] ==
+ELFCLASS32) ? "ELF32" : "ELF64");
+printf("  Data:    %s\n", (elf_header->e_ident[EI_DATA] == ELFDATA2LSB)
+? "2's complement, little endian" : "2's complement, big endian");
 printf("  Version: %d (current)\n", elf_header->e_ident[EI_VERSION]);
-printf("  OS/ABI:  %s\n", (elf_header->e_ident[EI_OSABI] == ELFOSABI_SYSV) ? "UNIX - System V" : "UNIX - NetBSD"); /* Update with more OS/ABI options */
+printf("  OS/ABI:  %s\n", (elf_header->e_ident[EI_OSABI] == ELFOSABI_SYSV)
+? "UNIX - System V" : "UNIX - NetBSD");
 printf("  ABI Version:  %d\n", elf_header->e_ident[EI_ABIVERSION]);
 printf("  Type:    %d\n", elf_header->e_type);
 printf("  Entry point address:  0x%lx\n", elf_header->e_entry);
