@@ -1,74 +1,54 @@
-#include <stdio.h>
-#include <fcntl.h>
-#include <elf.h>
-#include <unistd.h>
+#include "main.h"
 
 /**
- * display_elf_header - Displays the information contained in the ELF
- * header.
- * @elf_header: A pointer to an Elf64_Ehdr structure containing the ELF
- * header.
- */
-void display_elf_header(Elf64_Ehdr *elf_header)
-{
-int i;
-
-printf("ELF Header:\n");
-printf("  Magic:   ");
-for (i = 0; i < EI_NIDENT; i++)
-{
-printf("%02x ", elf_header->e_ident[i]);
-}
-printf("\n");
-printf("  Class:   %s\n", (elf_header->e_ident[EI_CLASS] ==
-ELFCLASS32) ? "ELF32" : "ELF64");
-printf("  Data:    %s\n", (elf_header->e_ident[EI_DATA] == ELFDATA2LSB)
-? "2's complement, little endian" : "2's complement, big endian");
-printf("  Version: %d (current)\n", elf_header->e_ident[EI_VERSION]);
-printf("  OS/ABI:  %s\n", (elf_header->e_ident[EI_OSABI] == ELFOSABI_SYSV)
-? "UNIX - System V" : "UNIX - NetBSD");
-printf("  ABI Version:  %d\n", elf_header->e_ident[EI_ABIVERSION]);
-printf("  Type:    %d\n", elf_header->e_type);
-printf("  Entry point address:  0x%lx\n", elf_header->e_entry);
-}
-
-/**
- * main - Displays the information contained in the ELF header at the
- * beginning of an ELF file.
- * @argc: The number of arguments supplied to the program.
- * @argv: An array of pointers to the arguments.
+ * main - Displays the ELF header information of an ELF file.
+ * @argc: The number of command-line arguments.
+ * @argv: An array of strings containing the command-line arguments.
  *
- * Return: 0 on success, error code otherwise.
+ * Return: 0 on success.
+ *
+ * Description: Terminates with exit code 98 if the file cannot be processed
+ *              as a valid ELF file or in case of an error during the operations.
  */
-int main(int argc, char *argv[])
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
-int fd;
-Elf64_Ehdr elf_header;
-ssize_t read_size;
+	Elf64_Ehdr *header;
+	int o, r;
 
-if (argc != 2)
-{
-fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
-return (1);
-}
+	o = open(argv[1], O_RDONLY);
+	if (o == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+		exit(98);
+	}
+	header = malloc(sizeof(Elf64_Ehdr));
+	if (header == NULL)
+	{
+		elf_close(o);
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+		exit(98);
+	}
+	r = read(o, header, sizeof(Elf64_Ehdr));
+	if (r == -1)
+	{
+		free(header);
+		elf_close(o);
+		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
+		exit(98);
+	}
 
-fd = open(argv[1], O_RDONLY);
-if (fd == -1)
-{
-fprintf(stderr, "Failed to open file: %s\n", argv[1]);
-return (1);
-}
+	elf_checker(header->elf_array_pointer);
+	printf("ELF Header:\n");
+	elf_magic_no_print(header->elf_array_pointer);
+	elf_class_print(header->elf_array_pointer);
+	elf_h_data_printer(header->elf_array_pointer);
+	elf_version_print(header->elf_array_pointer);
+	elf_osabi_print(header->elf_array_pointer);
+	elf_abi_print(header->elf_array_pointer);
+	elf_type_print(header->elf_type, header->elf_array_pointer);
+	elf_entry_print(header->elf_entry, header->elf_array_pointer);
 
-read_size = read(fd, &elf_header, sizeof(elf_header));
-if (read_size != sizeof(elf_header))
-{
-fprintf(stderr, "Failed to read ELF header\n");
-close(fd);
-return (1);
-}
-
-display_elf_header(&elf_header);
-
-close(fd);
-return (0);
+	free(header);
+	elf_close(o);
+	return (0);
 }
