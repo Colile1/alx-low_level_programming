@@ -1,4 +1,3 @@
-<<<<<<<<<<<<<<  ✨ Codeium Command ⭐ >>>>>>>>>>>>>>>>
 #include <fcntl.h>
 #include <unistd.h>
 #include "main.h"
@@ -41,4 +40,3 @@ close(file_descriptor);
 
 return (1);
 }
-<<<<<<<  336eb6fb-3787-442f-8991-ebe1f3b9c0b0  >>>>>>>
