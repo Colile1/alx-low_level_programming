@@ -4,7 +4,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+
 void print_elf_header(int fd) {
+int i;
 Elf64_Ehdr header;
 if (read(fd, &header, sizeof(header)) != sizeof(header)) {
 fprintf(stderr, "Error reading ELF header\n");
@@ -20,8 +22,9 @@ exit(98);
 }
 
 printf("Magic: ");
-for (int i = 0; i < EI_NIDENT; i++) {
-printf("%02x ", header.e_ident[i]);
+
+for (i = 0; i < EI_NIDENT; i++) {
+    printf("%02x ", header.e_ident[i]);
 }
 printf("\n");
 
@@ -67,12 +70,14 @@ printf("Entry point address: 0x%lx\n", header.e_entry);
 }
 
 int main(int argc, char *argv[]) {
+int fd;
+
 if (argc != 2) {
 fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
 exit(1);
 }
 
-int fd = open(argv[1], O_RDONLY);
+fd = open(argv[1], O_RDONLY);
 if (fd == -1) {
 perror("Error opening file");
 exit(1);
@@ -80,6 +85,10 @@ exit(1);
 
 print_elf_header(fd);
 
-close(fd);
-return 0;
+if (close(fd) == -1) {
+perror("Error closing file");
+exit(1);
+}
+
+return (0);
 }
