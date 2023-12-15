@@ -1,58 +1,50 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <fcntl.h>
 #include <elf.h>
-#include <string.h>
+#include <unistd.h>
 
-#define BUFFER_SIZE 64
-
-void display_error_message() {
-    dprintf(STDERR_FILENO, "Error: Not an ELF file or encountered an error\n");
-    exit(98);
-}
-
-void display_elf_header_info(const char *filename) {
-    int fd, read_result;
-    Elf64_Ehdr header;
-    unsigned int i;
-
-    fd = open(filename, O_RDONLY);
-    if (fd == -1) {
-        display_error_message();
+void display_elf_header(Elf64_Ehdr *elf_header) {
+    int i;
+    printf("ELF Header:\n");
+    printf("  Magic:   ");
+    for (i = 0; i < EI_NIDENT; i++) {
+        printf("%02x ", elf_header->e_ident[i]);
     }
-
-    read_result = read(fd, &header, sizeof(header));
-    if (read_result != sizeof(header)) {
-        display_error_message();
-    }
-
-    if (memcmp(header.e_ident, ELFMAG, SELFMAG) != 0) {
-        display_error_message();
-    }
-
-    printf("Magic: ");
-    for (i = 0; i < SELFMAG; ++i) {
-        printf("%02x ", header.e_ident[i]);
-    }
-    printf("\nClass: %s\n", (header.e_ident[EI_CLASS] == ELFCLASS32) ? "ELF32" : "ELF64");
-    printf("Data: %s\n", (header.e_ident[EI_DATA] == ELFDATA2LSB) ? "2's complement, little endian" : "2's complement, big endian");
-    printf("Version: %d\n", header.e_ident[EI_VERSION]);
-    printf("OS/ABI: %d\n", header.e_ident[EI_OSABI]);
-    printf("ABI Version: %d\n", header.e_ident[EI_ABIVERSION]);
-    printf("Type: %d\n", header.e_type);
-    printf("Entry point address: %lx\n", (unsigned long)header.e_entry);
-
-    close(fd);
+    printf("\n");
+    printf("  Class:   %s\n", (elf_header->e_ident[EI_CLASS] == ELFCLASS32) ? "ELF32" : "ELF64");
+    printf("  Data:    %s\n", (elf_header->e_ident[EI_DATA] == ELFDATA2LSB) ? "2's complement, little endian" : "2's complement, big endian");
+    printf("  Version: %d (current)\n", elf_header->e_ident[EI_VERSION]);
+    printf("  OS/ABI:  %s\n", (elf_header->e_ident[EI_OSABI] == ELFOSABI_SYSV) ? "UNIX - System V" : "UNIX - NetBSD"); /* Update with more OS/ABI options */
+    printf("  ABI Version:  %d\n", elf_header->e_ident[EI_ABIVERSION]);
+    printf("  Type:    %d\n", elf_header->e_type);
+    printf("  Entry point address:  0x%lx\n", elf_header->e_entry);
 }
 
 int main(int argc, char *argv[]) {
+    int fd;
+    Elf64_Ehdr elf_header;
+    ssize_t read_size;
+
     if (argc != 2) {
-        dprintf(STDERR_FILENO, "Usage: %s elf_filename\n", argv[0]);
-        return 98;
+        fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
+        return 1;
     }
-
-    display_elf_header_info(argv[1]);
-
-    return (0);
+    
+    fd = open(argv[1], O_RDONLY);
+    if (fd == -1) {
+        fprintf(stderr, "Failed to open file: %s\n", argv[1]);
+        return 1;
+    }
+    
+    read_size = read(fd, &elf_header, sizeof(elf_header));
+    if (read_size != sizeof(elf_header)) {
+        fprintf(stderr, "Failed to read ELF header\n");
+        close(fd);
+        return 1;
+    }
+    
+    display_elf_header(&elf_header);
+    
+    close(fd);
+    return 0;
 }
