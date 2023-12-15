@@ -3,11 +3,20 @@
 #include <elf.h>
 #include <unistd.h>
 
-void display_elf_header(Elf64_Ehdr *elf_header) {
+/**
+ * display_elf_header - Displays the information contained in the ELF
+ * header.
+ * @elf_header: A pointer to an Elf64_Ehdr structure containing the ELF
+ * header.
+ */
+void display_elf_header(Elf64_Ehdr *elf_header)
+{
 int i;
+
 printf("ELF Header:\n");
 printf("  Magic:   ");
-for (i = 0; i < EI_NIDENT; i++) {
+for (i = 0; i < EI_NIDENT; i++)
+{
 printf("%02x ", elf_header->e_ident[i]);
 }
 printf("\n");
@@ -20,6 +29,14 @@ printf("  Type:    %d\n", elf_header->e_type);
 printf("  Entry point address:  0x%lx\n", elf_header->e_entry);
 }
 
+/**
+ * main - Displays the information contained in the ELF header at the
+ * beginning of an ELF file.
+ * @argc: The number of arguments supplied to the program.
+ * @argv: An array of pointers to the arguments.
+ *
+ * Return: 0 on success, error code otherwise.
+ */
 int main(int argc, char *argv[])
 {
 int fd;
