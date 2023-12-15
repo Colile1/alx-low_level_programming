@@ -20,24 +20,28 @@ printf("  Type:    %d\n", elf_header->e_type);
 printf("  Entry point address:  0x%lx\n", elf_header->e_entry);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 int fd;
 Elf64_Ehdr elf_header;
 ssize_t read_size;
 
-if (argc != 2) {
+if (argc != 2)
+{
 fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
 return (1);
 }
 
 fd = open(argv[1], O_RDONLY);
-if (fd == -1) {
+if (fd == -1)
+{
 fprintf(stderr, "Failed to open file: %s\n", argv[1]);
 return (1);
 }
 
 read_size = read(fd, &elf_header, sizeof(elf_header));
-if (read_size != sizeof(elf_header)) {
+if (read_size != sizeof(elf_header))
+{
 fprintf(stderr, "Failed to read ELF header\n");
 close(fd);
 return (1);
