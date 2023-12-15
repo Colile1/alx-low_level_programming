@@ -1,7 +1,7 @@
+#include <unistd.h>
+
 #ifndef MAIN_H
 #define MAIN_H
-
-#include <unistd.h>
 
 /* Function to read a text file and print it to the POSIX standard output */
 ssize_t read_textfile(const char *filename, size_t letters);
@@ -15,6 +15,4 @@ void my_printf(const char *format, ...);
 size_t get_line_length(const char *str);
 char *my_strcat(char *dest, const char *src);
 
-
 #endif 
-
