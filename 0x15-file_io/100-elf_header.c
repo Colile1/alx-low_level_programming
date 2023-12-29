@@ -6,7 +6,16 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+void elf_checker(unsigned char *e_ident);
+void magic_printer(unsigned char *e_ident);
+void class_printer(unsigned char *e_ident);
+void data_printer(unsigned char *e_ident);
+void version_printer(unsigned char *e_ident);
+void print_abi(unsigned char *e_ident);
+void osabi_printer(unsigned char *e_ident);
+void type_printer(unsigned int e_type, unsigned char *e_ident);
+void entry_printer(unsigned long int e_entry, unsigned char *e_ident);
+void close_elf(int elf);
 /**
  * elf_checker - Checks if a file is an ELF file.
  * @e_ident: Points to an array containing ELF magic numbers.
