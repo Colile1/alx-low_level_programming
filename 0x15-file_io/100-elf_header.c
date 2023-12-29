@@ -12,14 +12,14 @@ void class_printer(unsigned char *e_ident);
 void data_printer(unsigned char *e_ident);
 void version_printer(unsigned char *e_ident);
 void abi_printer(unsigned char *e_ident);
-void print_osabi(unsigned char *e_ident);
-void print_type(unsigned int e_type, unsigned char *e_ident);
-void print_entry(unsigned long int e_entry, unsigned char *e_ident);
+void osabi_print(unsigned char *e_ident);
+void type_printer(unsigned int e_type, unsigned char *e_ident);
+void entry_printer(unsigned long int e_entry, unsigned char *e_ident);
 void close_elf(int elf);
 
 /**
  * elf_checker - Checks if a file is an ELF file.
- * @e_ident: A pointer to an array containing the ELF magic numbers.
+ * @e_ident: Points to array containing the ELF magic numbers.
  *
  * Description: If the file is not an ELF file - exit code 98.
  */
@@ -42,7 +42,7 @@ void elf_checker(unsigned char *e_ident)
 
 /**
  * magic_printer - Prints the magic numbers of an ELF header.
- * @e_ident: A pointer to an array containing the ELF magic numbers.
+ * @e_ident: Points to array containing the ELF magic numbers.
  *
  * Description: Magic numbers are separated by spaces.
  */
@@ -65,7 +65,7 @@ void magic_printer(unsigned char *e_ident)
 
 /**
  * class_printer - Prints the class of an ELF header.
- * @e_ident: A pointer to an array containing the ELF class.
+ * @e_ident: Points to array containing the ELF class.
  */
 void class_printer(unsigned char *e_ident)
 {
@@ -89,7 +89,7 @@ void class_printer(unsigned char *e_ident)
 
 /**
  * data_printer - Prints the data of an ELF header.
- * @e_ident: A pointer to an array containing the ELF class.
+ * @e_ident: Points to array containing the ELF class.
  */
 void data_printer(unsigned char *e_ident)
 {
@@ -113,7 +113,7 @@ void data_printer(unsigned char *e_ident)
 
 /**
  * version_printer - Prints the version of an ELF header.
- * @e_ident: A pointer to an array containing the ELF version.
+ * @e_ident: Points to array containing the ELF version.
  */
 void version_printer(unsigned char *e_ident)
 {
@@ -132,10 +132,10 @@ void version_printer(unsigned char *e_ident)
 }
 
 /**
- * print_osabi - Prints the OS/ABI of an ELF header.
- * @e_ident: A pointer to an array containing the ELF version.
+ * osabi_print - Prints the OS/ABI of an ELF header.
+ * @e_ident: Points to array containing the ELF version.
  */
-void print_osabi(unsigned char *e_ident)
+void osabi_print(unsigned char *e_ident)
 {
 	printf("  OS/ABI:                            ");
 
@@ -178,7 +178,7 @@ void print_osabi(unsigned char *e_ident)
 
 /**
  * abi_printer - Prints the ABI version of an ELF header.
- * @e_ident: A pointer to an array containing the ELF ABI version.
+ * @e_ident: Points to array containing the ELF ABI version.
  */
 void abi_printer(unsigned char *e_ident)
 {
@@ -187,11 +187,11 @@ void abi_printer(unsigned char *e_ident)
 }
 
 /**
- * print_type - Prints the type of an ELF header.
+ * type_printer - Prints the type of an ELF header.
  * @e_type: The ELF type.
- * @e_ident: A pointer to an array containing the ELF class.
+ * @e_ident: Points to array containing the ELF class.
  */
-void print_type(unsigned int e_type, unsigned char *e_ident)
+void type_printer(unsigned int e_type, unsigned char *e_ident)
 {
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 		e_type >>= 8;
@@ -221,11 +221,11 @@ void print_type(unsigned int e_type, unsigned char *e_ident)
 }
 
 /**
- * print_entry - Prints the entry point of an ELF header.
+ * entry_printer - Prints the entry point of an ELF header.
  * @e_entry: The address of the ELF entry point.
- * @e_ident: A pointer to an array containing the ELF class.
+ * @e_ident: Points to array containing the ELF class.
  */
-void print_entry(unsigned long int e_entry, unsigned char *e_ident)
+void entry_printer(unsigned long int e_entry, unsigned char *e_ident)
 {
 	printf("  Entry point address:               ");
 
@@ -303,10 +303,10 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	class_printer(header->e_ident);
 	data_printer(header->e_ident);
 	version_printer(header->e_ident);
-	print_osabi(header->e_ident);
+	osabi_print(header->e_ident);
 	abi_printer(header->e_ident);
-	print_type(header->e_type, header->e_ident);
-	print_entry(header->e_entry, header->e_ident);
+	type_printer(header->e_type, header->e_ident);
+	entry_printer(header->e_entry, header->e_ident);
 
 	free(header);
 	close_elf(o);
