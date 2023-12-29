@@ -6,16 +6,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-void elf_checker(unsigned char *e_ident);
-void magic_printer(unsigned char *e_ident);
-void class_printer(unsigned char *e_ident);
-void data_printer(unsigned char *e_ident);
-void version_printer(unsigned char *e_ident);
-void print_abi(unsigned char *e_ident);
-void osabi_printer(unsigned char *e_ident);
-void type_printer(unsigned int e_type, unsigned char *e_ident);
-void entry_printer(unsigned long int e_entry, unsigned char *e_ident);
-void close_elf(int elf);
+
 /**
  * elf_checker - Checks if a file is an ELF file.
  * @e_ident: Points to an array containing ELF magic numbers.
@@ -63,6 +54,30 @@ void magic_printer(unsigned char *e_ident)
 }
 
 /**
+ * class_printer - Prints the class of an ELF header.
+ * @e_ident: Points to an array containing the ELF class.
+ */
+void class_printer(unsigned char *e_ident)
+{
+	printf("  Class:                           ");
+
+	switch (e_ident[EI_CLASS])
+	{
+	case ELFCLASSNONE:
+		printf("none\n");
+		break;
+	case ELFCLASS32:
+		printf("ELF32\n");
+		break;
+	case ELFCLASS64:
+		printf("ELF64\n");
+		break;
+	default:
+		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
+	}
+}
+
+/**
  * data_printer - Prints the data of an ELF header.
  * @e_ident: Points to an array containing the ELF class.
  */
@@ -83,6 +98,26 @@ void data_printer(unsigned char *e_ident)
 		break;
 	default:
 		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
+	}
+}
+
+/**
+ * version_printer - Prints the version of an ELF header.
+ * @e_ident: Points to an array containing the ELF version.
+ */
+void version_printer(unsigned char *e_ident)
+{
+	printf("  Version:                           %d",
+	       e_ident[EI_VERSION]);
+
+	switch (e_ident[EI_VERSION])
+	{
+	case EV_CURRENT:
+		printf(" (current)\n");
+		break;
+	default:
+		printf("\n");
+		break;
 	}
 }
 
@@ -160,27 +195,6 @@ void print_abi(unsigned char *e_ident)
 }
 
 /**
- * version_printer - Prints the version of an ELF header.
- * @e_ident: Points to an array containing the ELF version.
- */
-void version_printer(unsigned char *e_ident)
-{
-	printf("  Version:                           %d",
-	       e_ident[EI_VERSION]);
-
-	switch (e_ident[EI_VERSION])
-	{
-	case EV_CURRENT:
-		printf(" (current)\n");
-		break;
-	default:
-		printf("\n");
-		break;
-	}
-}
-
-
-/**
  * type_printer - Prints ELF header type.
  * @e_type: The ELF type.
  * @e_ident: Points to an array containing the ELF class.
@@ -213,31 +227,6 @@ void type_printer(unsigned int e_type, unsigned char *e_ident)
 		printf("<unknown: %x>\n", e_type);
 	}
 }
-
-/**
- * class_printer - Prints the class of an ELF header.
- * @e_ident: Points to an array containing the ELF class.
- */
-void class_printer(unsigned char *e_ident)
-{
-	printf("  Class:                           ");
-
-	switch (e_ident[EI_CLASS])
-	{
-	case ELFCLASSNONE:
-		printf("none\n");
-		break;
-	case ELFCLASS32:
-		printf("ELF32\n");
-		break;
-	case ELFCLASS64:
-		printf("ELF64\n");
-		break;
-	default:
-		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
-	}
-}
-
 
 /**
  * entry_printer - Prints the entry point of an ELF header.
