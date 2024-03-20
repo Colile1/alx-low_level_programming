@@ -1,7 +1,10 @@
-all: school
+all:
+    gcc main.c school.c -o school
 
-school: main.o school.o
-    gcc $^ -o $@
+school: main.o school.o 
 
-%.o: %.c
-    gcc -c $< -o $@
+main.o: main.c
+    gcc -c main.c -o main.o
+
+school.o: school.c
+    gcc -c school.c -o school.o
