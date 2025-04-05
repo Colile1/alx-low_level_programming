@@ -1,28 +1,25 @@
 #include "main.h"
 
 /**
- * jack_bauer - prints every minute of the day of Jack Bauer
- * starting from 00:00 to 23:59
+ * print_sign - prints the sign of a number
+ * @n: the number to check
+ * Return: 1 if positive, 0 if zero, -1 if negative
  */
-void jack_bauer(void)
+int print_sign(int n)
 {
-	int i, j;
-
-	i = 0;
-
-	while (i < 24)
+	if (n > 0)
 	{
-		j = 0;
-		while (j < 60)
-		{
-			_putchar((i / 10) + '0');
-			_putchar((i % 10) + '0');
-			_putchar(':');
-			_putchar((j / 10) + '0');
-			_putchar((j % 10) + '0');
-			_putchar('\n');
-			j++;
-		}
-		i++;
+		_putchar('+');
+		return (1);
+	}
+	else if (n == 0)
+	{
+		_putchar('0');
+		return (0);
+	}
+	else
+	{
+		_putchar('-');
+		return (-1);
 	}
 }
