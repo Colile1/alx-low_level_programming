@@ -1,18 +1,20 @@
 #include "main.h"
 #include <stdio.h>
-/**
- * _memset - Fills memory with a constant byte
- * @s: The pointer to the memory area
- * @b: The constant byte to fill the memory
- * @n: The number of bytes to fill
- *
- * Return: A pointer to the memory area s
- */
-char *_memset(char *s, char b, unsigned int n)
-{
-	unsigned int i;
 
-	for (i = 0; i < n; i++)
-		s[i] = b;
-	return (s);
+/**
+ * print_diagsums - prints the sum of the two diagonals of a square matrix
+ * @a: pointer to the first element of the matrix
+ * @size: dimension of the matrix
+ */
+void print_diagsums(int *a, int size)
+{
+    int i;
+    long sum1 = 0, sum2 = 0;
+
+    for (i = 0; i < size; i++)
+    {
+        sum1 += a[i * size + i];
+        sum2 += a[i * size + (size - i - 1)];
+    }
+    printf("%ld, %ld\n", sum1, sum2);
 }
